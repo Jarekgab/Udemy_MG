@@ -22,11 +22,16 @@ public class ShoppingListAdapter extends ArrayAdapter {
     List<String> spinnerItems;
     Spinner spinner;
 
-    public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects, ArrayAdapter<String> spinnerAdapter, List<String> spinnerItems, Spinner spinner) {
+
+    public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
         this.objects = objects;
+    }
+
+    public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects, ArrayAdapter<String> spinnerAdapter, List<String> spinnerItems, Spinner spinner) {
+        this(context, resource, objects);
         this.spinnerAdapter = spinnerAdapter;
         this.spinnerItems = spinnerItems;
         this.spinner = spinner;
@@ -57,7 +62,7 @@ public class ShoppingListAdapter extends ArrayAdapter {
         CheckBox selected = rowView.findViewById(R.id.selected_CB);
         selected.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {           //
+            public void onClick(View v) {
                 spinnerItems.add(objects.get(position));
                 spinnerItems.remove("");             //?
                 spinnerItems.add((String) "");          //?
