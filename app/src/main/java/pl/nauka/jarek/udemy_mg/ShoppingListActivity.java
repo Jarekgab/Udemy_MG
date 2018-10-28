@@ -29,6 +29,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     ListView itemList;
     @BindView(R.id.itemSpinner)
     Spinner itemSpinner;
+
     private List<String> listItems;     //lista zwykła
     private List<String> spinnerItems;  //lista rozwijana
 
@@ -56,8 +57,8 @@ public class ShoppingListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (itemName.getText()!=null && !itemName.getText().toString().trim().isEmpty() && listSetItems.add(itemName.getText().toString()))
                 {
-                    listItems.add(itemName.getText().toString());
-                    itemName.setText("");
+                    listItems.add(itemName.getText().toString());   //dodaj do listy
+                    itemName.setText("");                           //wyczysc EditText
                     listAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
                 }
 
@@ -65,7 +66,8 @@ public class ShoppingListActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        SharedPreferences sp = getSharedPreferences(SHOPPING_LIST_KEY, MODE_PRIVATE);
+
+        SharedPreferences sp = getSharedPreferences(SHOPPING_LIST_KEY, MODE_PRIVATE);   //odczytywanie z onPause
         listSetItems = sp.getStringSet(LIST_ITEMS_KEY, new ArraySet<String>());
         spinnerSetItems = sp.getStringSet(SPINNER_ITEMS_KEY, new ArraySet<String>());
 
@@ -73,7 +75,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         spinnerItems = new ArrayList<>(spinnerSetItems);
 
         spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_item, spinnerItems);
-        itemSpinner.setAdapter(spinnerAdapter);
+        itemSpinner.setAdapter(spinnerAdapter);     //wyswietlenia na spinerze w aplikacji listy (spinner Items)
 
         itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
