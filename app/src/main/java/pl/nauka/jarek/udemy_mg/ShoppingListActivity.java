@@ -95,7 +95,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
 
         listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, listItems, spinnerAdapter, spinnerItems, itemSpinner);
-        itemList.setAdapter(listAdapter);   //ustawienie adaptera na itemList
+        itemList.setAdapter(listAdapter);   //ustawienie adaptera na itemList //wrzucenie danych do zwyklej listy w aplikacji za pomocą ShoppingListAdapter
 
     }
 

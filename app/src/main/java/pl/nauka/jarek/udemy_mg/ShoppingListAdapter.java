@@ -15,18 +15,18 @@ import android.widget.TextView;
 import java.util.List;
 
 public class ShoppingListAdapter extends ArrayAdapter {
-    private List<String> objects;
+    private List<String> listItems;
     private Context context;
     private int resource;
     ArrayAdapter<String> spinnerAdapter;
     List<String> spinnerItems;
     Spinner spinner;
 
-    public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects, ArrayAdapter<String> spinnerAdapter, List<String> spinnerItems, Spinner spinner) {
-        super(context, resource, objects);
+    public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> listItems, ArrayAdapter<String> spinnerAdapter, List<String> spinnerItems, Spinner spinner) {
+        super(context, resource, listItems);
         this.context = context;
         this.resource = resource;
-        this.objects = objects;
+        this.listItems = listItems;
         this.spinnerAdapter = spinnerAdapter;
         this.spinnerItems = spinnerItems;
         this.spinner = spinner;
@@ -51,19 +51,21 @@ public class ShoppingListAdapter extends ArrayAdapter {
         //w rowView mamy dostęp do elementów row_shopping_list
 
         TextView name = rowView.findViewById(R.id.name_ET);
-        name.setText("" + objects.get(position));
-        //setText bo ustawilismy @NonNull List objects czyli private List<String> objects;
+        name.setText(listItems.get(position));
+        //setText bo ustawilismy private List<String> listItems;
 
         CheckBox selected = rowView.findViewById(R.id.selected_CB);
         selected.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {           //
-                spinnerItems.add(objects.get(position));
+            public void onClick(View v) {           //akcja na selected czyli CheckBox
+                spinnerItems.add(listItems.get(position));  //pobieranie z listy i dodanie do spinnera
+
                 spinnerItems.remove("");             //?
                 spinnerItems.add((String) "");          //?
                 spinner.setSelection(spinnerItems.indexOf(""));     //?
+
                 spinnerAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
-                objects.remove(position);       //usunięcie elementu z listy
+                listItems.remove(position);       //usunięcie elementu z listy
                 ShoppingListAdapter.super.notifyDataSetChanged();   //powidaomienie tego adaptera
             }
         });
@@ -73,3 +75,5 @@ public class ShoppingListAdapter extends ArrayAdapter {
 
 
 }
+//TODO 1.Możliwość dodawania tych samych elementów
+//TODO 2.Usunięcie pustego miejsca w spinner
