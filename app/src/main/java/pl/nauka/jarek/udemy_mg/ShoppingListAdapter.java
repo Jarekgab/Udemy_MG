@@ -75,5 +75,5 @@ public class ShoppingListAdapter extends ArrayAdapter {
 
 
 }
-//TODO 1.Możliwość dodawania tych samych elementów
+//TODO 1.Po otwarciu listy zakupów uzupełnia textview pozycja ze spinnera. Następnie usuwa go.
 //TODO 2.Usunięcie pustego miejsca w spinner
