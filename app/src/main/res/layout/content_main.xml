@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/drawButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -36,23 +36,23 @@
         app:layout_constraintTop_toBottomOf="@+id/shoppingListButton" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/apiButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/api_button"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/drawButton"
+        app:layout_constraintStart_toStartOf="@+id/drawButton"
+        app:layout_constraintTop_toBottomOf="@+id/drawButton" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/viewButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/view_button"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintEnd_toEndOf="@+id/apiButton"
+        app:layout_constraintStart_toStartOf="@+id/apiButton"
+        app:layout_constraintTop_toBottomOf="@+id/apiButton" />
 
 </android.support.constraint.ConstraintLayout>

@@ -54,7 +54,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (itemName.getText()!=null && !itemName.getText().toString().trim().isEmpty())        // && listSetItems.add(itemName.getText().toString())
+                if (itemName.getText()!=null && !itemName.getText().toString().trim().isEmpty())
                 {
                     listItems.add(itemName.getText().toString());
                     itemName.setText("");

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.shoppingListButton)
     Button shoppingListButton;
+    @BindView(R.id.drawButton)
+    Button drawButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.shoppingListButton)
-    void onClickShoppingList(){
+    void onClickShoppingList() {
         Intent intent = new Intent(this, ShoppingListActivity.class);
         startActivity(intent);
     }
 
-
-
+    @OnClick(R.id.drawButton)
+    public void onViewClicked() {
+        Intent intent = new Intent(this, DrawActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
