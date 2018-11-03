@@ -15,7 +15,7 @@ public class ApiActivityExample extends AppCompatActivity {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    @BindView(R.id.button)
+    @BindView(R.id.getHtmlDataButton)
     Button button;
     @BindView(R.id.textView)
     TextView textView;

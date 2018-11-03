@@ -21,22 +21,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/htmlDataButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Button"
+        android:text="@string/html_button"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="@+id/progressBar"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/resoultTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/jsonDataButton"
+        app:layout_constraintStart_toStartOf="@+id/jsonDataButton"
+        app:layout_constraintTop_toBottomOf="@+id/jsonDataButton" />
+
+    <Button
+        android:id="@+id/jsonDataButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/json_button"
+        app:layout_constraintEnd_toEndOf="@+id/htmlDataButton"
+        app:layout_constraintStart_toStartOf="@+id/htmlDataButton"
+        app:layout_constraintTop_toBottomOf="@+id/htmlDataButton" />
 </android.support.constraint.ConstraintLayout>

@@ -7,6 +7,8 @@
     <string name="draw_button_layout">Rysowanie (LAYOUT)</string>
     <string name="api_button">API</string>
     <string name="view_button">Widok</string>
+    <string name="html_button">Dane z HTML</string>
+    <string name="json_button">Dane z JSON</string>
     <string name="title_activity_shopping_list">Lista zakupów</string>
     <string name="title_activity_draw_layout">Rysowanie</string>
     <string name="title_activity_api_layout">API</string>
