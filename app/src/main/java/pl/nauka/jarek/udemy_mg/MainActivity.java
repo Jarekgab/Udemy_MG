@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     Button drawButton;
     @BindView(R.id.drawButtonLayout)
     Button drawButtonLayout;
+    @BindView(R.id.apiButton)
+    Button apiButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.drawButtonLayout)
     public void onClickDrawButtonLayout() {
         Intent intent = new Intent(this, DrawLayoutActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.apiButton)
+    public void onClickApiButton() {
+        Intent intent = new Intent(this, ApiActivity.class);
         startActivity(intent);
     }
 
