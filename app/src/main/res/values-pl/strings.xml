@@ -8,4 +8,6 @@
     <string name="api_button">API</string>
     <string name="view_button">Widok</string>
     <string name="title_activity_shopping_list">Lista zakupów</string>
+    <string name="title_activity_draw_layout">Rysowanie</string>
+    <string name="clear_button">CZYŚĆ</string>
 </resources>

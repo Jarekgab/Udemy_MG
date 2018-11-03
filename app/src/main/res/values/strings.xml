@@ -7,5 +7,7 @@
     <string name="api_button">API</string>
     <string name="view_button">View</string>
     <string name="title_activity_shopping_list">Shopping list</string>
-    <string name="title_activity_draw_layout">DrawLayoutActivity</string>
+    <string name="title_activity_draw_layout">Drawing</string>
+    <string name="clear_button">CLEAR</string>
+
 </resources>
