@@ -43,6 +43,10 @@
             android:name=".ApiActivity"
             android:label="@string/title_activity_api_layout">
         </activity>
+        <activity
+            android:name=".ApiActivityExample"
+            android:label="@string/title_activity_api_example_layout">
+        </activity>
     </application>
 
 </manifest>

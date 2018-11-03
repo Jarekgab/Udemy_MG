@@ -21,9 +21,10 @@
         android:text="@string/shopping_list_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.205" />
 
     <Button
         android:id="@+id/drawButton"
@@ -46,14 +47,26 @@
         app:layout_constraintTop_toBottomOf="@+id/drawButtonLayout" />
 
     <Button
+        android:id="@+id/apiExampleButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="API EXAMPLE"
+        app:layout_constraintEnd_toEndOf="@+id/drawButtonLayout"
+        app:layout_constraintStart_toStartOf="@+id/drawButtonLayout"
+        app:layout_constraintTop_toBottomOf="@+id/apiButton" />
+
+    <Button
         android:id="@+id/viewButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:text="@string/view_button"
-        app:layout_constraintEnd_toEndOf="@+id/apiButton"
-        app:layout_constraintStart_toStartOf="@+id/apiButton"
-        app:layout_constraintTop_toBottomOf="@+id/apiButton" />
+        app:layout_constraintEnd_toEndOf="@+id/apiExampleButton"
+        app:layout_constraintStart_toStartOf="@+id/apiExampleButton"
+        app:layout_constraintTop_toBottomOf="@+id/apiExampleButton" />
 
     <Button
         android:id="@+id/drawButtonLayout"
