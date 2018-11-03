@@ -41,9 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/api_button"
-        app:layout_constraintEnd_toEndOf="@+id/drawButton"
-        app:layout_constraintStart_toStartOf="@+id/drawButton"
-        app:layout_constraintTop_toBottomOf="@+id/drawButton" />
+        app:layout_constraintEnd_toEndOf="@+id/drawButtonLayout"
+        app:layout_constraintStart_toStartOf="@+id/drawButtonLayout"
+        app:layout_constraintTop_toBottomOf="@+id/drawButtonLayout" />
 
     <Button
         android:id="@+id/viewButton"
@@ -54,5 +54,15 @@
         app:layout_constraintEnd_toEndOf="@+id/apiButton"
         app:layout_constraintStart_toStartOf="@+id/apiButton"
         app:layout_constraintTop_toBottomOf="@+id/apiButton" />
+
+    <Button
+        android:id="@+id/drawButtonLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/draw_button_layout"
+        app:layout_constraintEnd_toEndOf="@+id/drawButton"
+        app:layout_constraintStart_toStartOf="@+id/drawButton"
+        app:layout_constraintTop_toBottomOf="@+id/drawButton" />
 
 </android.support.constraint.ConstraintLayout>

@@ -4,6 +4,7 @@
     <string name="action_settings">Ustawienia</string>
     <string name="shopping_list_button">Lista zakupów</string>
     <string name="draw_button">Rysowanie</string>
+    <string name="draw_button_layout">Rysowanie (LAYOUT)</string>
     <string name="api_button">API</string>
     <string name="view_button">Widok</string>
     <string name="title_activity_shopping_list">Lista zakupów</string>
