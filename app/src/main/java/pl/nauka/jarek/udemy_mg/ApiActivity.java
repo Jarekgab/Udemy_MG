@@ -1,6 +1,5 @@
 package pl.nauka.jarek.udemy_mg;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +22,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,16 +51,49 @@ public class ApiActivity extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
 
 
-
         requestQueue = Volley.newRequestQueue(this);                                   //kolejka do obsługi sieci, zamiast wielowatkosci
 
         htmlDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://www.google.pl/", new Response.Listener<String>() {
+                resultTextView.setText("");
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://jsonplaceholder.typicode.com/users", new Response.Listener<String>() {  //https://www.google.pl/
                     @Override
                     public void onResponse(String response) {           //response wszystkie dane
-                        resultTextView.setText(response);                      //odpowiwedz, że udało się coś pobrać
+//                        resultTextView.setText(response);                      //odpowiwedz, że udało się coś pobrać
+
+                        //Liczenie "\"name\": "
+
+                        String in = response;
+                        int i = 0;
+
+                        Pattern p = Pattern.compile("\"name\": ");
+                        Matcher m = p.matcher(in);
+                        while (m.find()) {
+                            i++;
+                        }
+
+                        //Zapisywanie name
+
+                        String userCut = response;
+                        int a = 0;
+                        int lp = 1;
+
+                        for (int k = 0; k < i; k++) {
+
+                            if (a == 2) {
+                                a = 0;
+                            }
+
+                            userCut = userCut.substring(userCut.indexOf("\"name\": ") + 8);
+                            String name = userCut.substring(userCut.indexOf("\"") + 1, userCut.indexOf("\","));
+
+                            if (a == 0) {
+                                resultTextView.append(lp + ". " + name + "\n");
+                                lp++;
+                            }
+                            a++;
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -80,6 +114,8 @@ public class ApiActivity extends AppCompatActivity {
         jsonDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resultTextView.setText("");
+                users.clear();
                 JsonArrayRequest jar = new JsonArrayRequest(jsonUrl, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -93,7 +129,9 @@ public class ApiActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        resultTextView.setText(users.get(0).getName());
+                        for (int i = 0; i < users.size(); i++) {
+                            resultTextView.append(i + 1 + ". " + users.get(i).getName() + "\n");
+                        }
                     }
                 },
                         new Response.ErrorListener() {
@@ -108,57 +146,4 @@ public class ApiActivity extends AppCompatActivity {
         });
 
     }
-
-    private class ThreadClass extends AsyncTask<String, Integer, Float> {
-
-        @Override
-        protected void onPreExecute() {     //metoda działa w wątku użytkowmika, np. pzygot. statusBar, ProgressBar
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setMax(100);
-//            resultTextView.setText("" + System.currentTimeMillis());      //pokazuje aktualny czas w ms
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {   //metoda działa w wątku użytkowmika
-                                                             //informacja, która w parametach values jest przechowywana
-                                                            //np aktualizacja ProgressBar
-                                                            //zbiera infomacje z metody doInBackground
-            progressBar.setProgress(values[0]);
-            super.onProgressUpdate(values);
-
-        }
-
-        @Override
-        protected Float doInBackground(String... params) {      //metoda działa w innym wątku
-
-            String url = params[0];                            //dostęp do parametrów przekazanych w new ThreadClass() (URL..)
-
-//            resultTextView.setText(resultTextView.getText() + "     " + "" + System.currentTimeMillis() + "!!");
-
-            String a = url;
-            for (int i = 0; i < 10000; i++) {
-                a = a + url;
-
-                if (i > 0 && i % 100 == 0)
-                publishProgress(i / 100);
-            }
-            return 0.0F;        //parametr ostaniej zmiennej, czyli  new ThreadClass().execute("URL", "URL2", "URL3");
-        }
-
-        @Override
-        protected void onPostExecute(Float f) {          //metoda, która działa po zakończeniu innyc wątków np. ukrycia ProgressBar
-            progressBar.setVisibility(View.INVISIBLE);
-//            resultTextView.setText(resultTextView.getText() +"     "+ "" + System.currentTimeMillis());
-            super.onPostExecute(f);
-        }
-
-        @Override
-        protected void onCancelled(Float f) {           //działa na wywołanie cancel() w metodzie doInBackground
-            super.onCancelled(f);
-        }
-    }
-
-
-
 }
