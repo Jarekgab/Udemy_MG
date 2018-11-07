@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.nauka.jarek.udemy_mg">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,7 +30,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.nauka.jarek.udemy_mg.MainActivity" />
         </activity>
-        <activity android:name=".DrawActivity"
+        <activity
+            android:name=".DrawActivity"
             android:label="@string/title_activity_draw_layout" />
         <activity
             android:name=".DrawLayoutActivity"
@@ -42,12 +44,11 @@
         </activity>
         <activity
             android:name=".ApiActivity"
-            android:label="@string/title_activity_api_layout">
-        </activity>
+            android:label="@string/title_activity_api_layout"></activity>
         <activity
             android:name=".ApiActivityExample"
-            android:label="@string/title_activity_api_example_layout">
-        </activity>
+            android:label="@string/title_activity_api_example_layout"></activity>
+        <activity android:name=".ViewActivity"></activity>
     </application>
 
 </manifest>

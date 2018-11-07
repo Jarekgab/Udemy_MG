@@ -1,6 +1,7 @@
 package pl.nauka.jarek.udemy_mg;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     Button apiButton;
     @BindView(R.id.apiExampleButton)
     Button apiExampleButton;
+    @BindView(R.id.viewButton)
+    Button viewButton;
+    @BindView(R.id.infoButton)
+    Button infoButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,20 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.apiExampleButton)
     public void onClickApiExampleButton() {
         Intent intent = new Intent(this, ApiActivityExample.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.viewButton)
+    public void onClickViewButton() {
+        Intent intent = new Intent(this, ViewActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.infoButton)
+    public void onClickInfoButton() {
+        String url = "https://www.udemy.com/praktyczny-podstawowy-kurs-programowania-android/learn/v4/content";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
         startActivity(intent);
     }
 

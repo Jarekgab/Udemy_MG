@@ -24,7 +24,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <Button
         android:id="@+id/drawButton"
@@ -77,5 +77,16 @@
         app:layout_constraintEnd_toEndOf="@+id/drawButton"
         app:layout_constraintStart_toStartOf="@+id/drawButton"
         app:layout_constraintTop_toBottomOf="@+id/drawButton" />
+
+    <Button
+        android:id="@+id/infoButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/info_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/shoppingListButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/shoppingListButton" />
 
 </android.support.constraint.ConstraintLayout>

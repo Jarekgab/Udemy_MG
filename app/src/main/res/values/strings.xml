@@ -8,6 +8,7 @@
     <string name="view_button">View</string>
     <string name="html_button">Data from HTML</string>
     <string name="json_button">Data from JSON</string>
+    <string name="info_button">Information</string>
     <string name="title_activity_shopping_list">Shopping list</string>
     <string name="title_activity_draw_layout">Drawing</string>
     <string name="title_activity_api_layout">API</string>

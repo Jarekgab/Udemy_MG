@@ -62,7 +62,7 @@ public class ApiActivity extends AppCompatActivity {
                     public void onResponse(String response) {           //response wszystkie dane
 //                        resultTextView.setText(response);                      //odpowiwedz, że udało się coś pobrać
 
-                        //Liczenie "\"name\": "
+                        //Liczenie "\"name\": " -> czyli ustalenie wartości skrajnych petli for
 
                         String in = response;
                         int i = 0;
