@@ -35,6 +35,7 @@ dependencies {
     implementation group: 'commons-lang', name: 'commons-lang', version: '2.6'
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'com.github.migellal:dayview:0.0.1'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 
     configurations {
         cleanedAnnotations
