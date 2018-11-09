@@ -31,8 +31,6 @@ import pl.nauka.jarek.udemy_mg.model.User;
 
 public class ApiActivity extends AppCompatActivity {
 
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
     @BindView(R.id.htmlDataButton)
     Button htmlDataButton;
     @BindView(R.id.resoultTextView)
@@ -48,8 +46,6 @@ public class ApiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_api);
         ButterKnife.bind(this);
-        progressBar.setVisibility(View.INVISIBLE);
-
 
         requestQueue = Volley.newRequestQueue(this);                                   //kolejka do obsługi sieci, zamiast wielowatkosci
 
