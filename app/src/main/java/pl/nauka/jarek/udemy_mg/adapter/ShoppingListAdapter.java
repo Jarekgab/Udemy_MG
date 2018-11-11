@@ -1,4 +1,4 @@
-package pl.nauka.jarek.udemy_mg;
+package pl.nauka.jarek.udemy_mg.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
+
+import pl.nauka.jarek.udemy_mg.R;
 
 public class ShoppingListAdapter extends ArrayAdapter {
     private List<String> listItems;

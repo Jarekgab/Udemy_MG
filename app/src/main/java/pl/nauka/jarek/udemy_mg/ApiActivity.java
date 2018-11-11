@@ -1,10 +1,15 @@
 package pl.nauka.jarek.udemy_mg;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -27,9 +32,10 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.nauka.jarek.udemy_mg.common.Connectivity;
 import pl.nauka.jarek.udemy_mg.model.User;
 
-public class ApiActivity extends AppCompatActivity {
+public class ApiActivity extends AppCompatActivity{
 
     @BindView(R.id.htmlDataButton)
     Button htmlDataButton;
@@ -37,8 +43,17 @@ public class ApiActivity extends AppCompatActivity {
     TextView resultTextView;
     @BindView(R.id.jsonDataButton)
     Button jsonDataButton;
+    @BindView(R.id.isConnectedTextView)
+    TextView isConnectedTextView;
+    @BindView(R.id.isConnectedWifiTextView)
+    TextView isConnectedWifiTextView;
+    @BindView(R.id.isConnectedMobileTextView)
+    TextView isConnectedMobileTextView;
+    @BindView(R.id.imageView)
+    ImageView imageView;
 
     private RequestQueue requestQueue;
+    BroadcastReceiver updateUIReciver;
 
 
     @Override
@@ -46,6 +61,23 @@ public class ApiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_api);
         ButterKnife.bind(this);
+
+        //Pobieranie danych z ConnectivityChange bez onCreate()
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("service.to.activity.transfer");
+
+        updateUIReciver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if(intent != null){
+                    String s = intent.getStringExtra("CONNECTIVITY");
+                    connectivityChange();
+                }
+            }
+        };
+        registerReceiver(updateUIReciver, filter);
+
+        connectivityChange();
 
         requestQueue = Volley.newRequestQueue(this);                                   //kolejka do obsługi sieci, zamiast wielowatkosci
 
@@ -140,6 +172,36 @@ public class ApiActivity extends AppCompatActivity {
                 requestQueue.add(jar);
             }
         });
+    }
 
+    private void connectivityChange() {
+        if (Connectivity.isConnected(this)) {
+            htmlDataButton.setVisibility(View.VISIBLE);
+            jsonDataButton.setVisibility(View.VISIBLE);
+            resultTextView.setVisibility(View.VISIBLE);
+            resultTextView.setTextColor(Color.BLACK);
+            resultTextView.setText("");
+            resultTextView.setTextSize(15);
+            imageView.setImageResource(R.drawable.ic_check_circle);
+        } else {
+            htmlDataButton.setVisibility(View.INVISIBLE);
+            jsonDataButton.setVisibility(View.INVISIBLE);
+            resultTextView.setTextColor(Color.RED);
+            resultTextView.setText("  Sprawdź dostęp do internetu :-/");
+            resultTextView.setTextSize(20);
+            imageView.setImageResource(R.drawable.ic_remove_circle);
+        }
+
+        if (Connectivity.isConnectedWifi(this)) {
+            isConnectedWifiTextView.setText("Wifi ON");
+        } else {
+            isConnectedWifiTextView.setText("Wifi OFF");
+        }
+
+        if (Connectivity.isConnectedMobile(this)) {
+            isConnectedMobileTextView.setText("Mobile ON");
+        } else {
+            isConnectedMobileTextView.setText("Mobile OFF");
+        }
     }
 }

@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.nauka.jarek.udemy_mg.adapter.ShoppingListAdapter;
 
 public class ShoppingListActivity extends AppCompatActivity {
 

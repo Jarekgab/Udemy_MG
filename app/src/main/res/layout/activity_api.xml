@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/corners"
         android:text="@string/html_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/isConnectedWifiTextView" />
 
     <TextView
         android:id="@+id/resoultTextView"
@@ -42,4 +42,51 @@
         app:layout_constraintEnd_toEndOf="@+id/htmlDataButton"
         app:layout_constraintStart_toStartOf="@+id/htmlDataButton"
         app:layout_constraintTop_toBottomOf="@+id/htmlDataButton" />
+
+    <TextView
+        android:id="@+id/isConnectedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Connected"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/isConnectedWifiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Wifi"
+        app:layout_constraintEnd_toStartOf="@+id/isConnectedMobileTextView"
+        app:layout_constraintStart_toEndOf="@+id/isConnectedTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/isConnectedMobileTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Mobile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/isConnectedWifiTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/isConnectedTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="11dp" />
 </android.support.constraint.ConstraintLayout>
