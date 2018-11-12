@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -46,19 +46,28 @@
         </activity>
         <activity
             android:name=".ApiActivity"
-            android:label="@string/title_activity_api_layout"></activity>
+            android:label="@string/title_activity_api_layout" />
         <activity
             android:name=".ApiActivityExample"
-            android:label="@string/title_activity_api_example_layout"></activity>
-        <activity android:name=".ViewActivity"></activity>
+            android:label="@string/title_activity_api_example_layout" />
+        <activity android:name=".ViewActivity" />
 
         <receiver android:name=".common.ConnectivityChange">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.nauka.jarek.udemy_mg.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -15,4 +15,9 @@
     <string name="title_activity_api_layout">API</string>
     <string name="title_activity_api_example_layout">API przykład</string>
     <string name="clear_button">CZYŚĆ</string>
+    <string name="title_activity_about">O aplikacji</string>
+    <string name="description">Opanowałeś już javę, ale jeszcze masz przed sobą pierwszą aplikację mobilną? Zaczynasz programować, ale czujesz, że chcesz rozwijać się szybciej?
+        W tym kursie nauczysz się niezbędnych podstaw do zbudowania swojej pierwszej wydajnej i dobrze działającej aplikacji na system operacyjny Android zamiast czekania,
+        aż ktoś inny zrealizuje pomysł, który wpadł Ci do głowy. Aplikacja wykorzysta chociażby zewnętrzne API, nauczysz się, jak ją zamieścić w sklepie Play,
+        pochwalisz się pracodawcy lub zaczniesz na niej zarabiać. Ty wybierasz.</string>
 </resources>

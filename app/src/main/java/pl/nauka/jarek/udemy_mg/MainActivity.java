@@ -1,7 +1,6 @@
 package pl.nauka.jarek.udemy_mg;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -79,9 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.infoButton)
     public void onClickInfoButton() {
-        String url = "https://www.udemy.com/praktyczny-podstawowy-kurs-programowania-android/learn/v4/content";
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
+//        String url = "https://www.udemy.com/praktyczny-podstawowy-kurs-programowania-android/learn/v4/content";
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setData(Uri.parse(url));
+//        startActivity(intent);
+
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
