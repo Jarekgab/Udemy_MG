@@ -1,5 +1,6 @@
 package pl.nauka.jarek.udemy_mg;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -44,7 +45,7 @@ public class AboutActivity extends AppCompatActivity {
 
     @OnClick(R.id.ll_licenses)
     public void onClickLicenses() {
-        //TODO Zrobić liste licencji
-
+        Intent intent = new Intent(this, LicenseActivity.class);
+        startActivity(intent);
     }
 }

@@ -19,4 +19,5 @@
         W tym kursie nauczysz się niezbędnych podstaw do zbudowania swojej pierwszej wydajnej i dobrze działającej aplikacji na system operacyjny Android zamiast czekania,
         aż ktoś inny zrealizuje pomysł, który wpadł Ci do głowy. Aplikacja wykorzysta chociażby zewnętrzne API, nauczysz się, jak ją zamieścić w sklepie Play,
         pochwalisz się pracodawcy lub zaczniesz na niej zarabiać. Ty wybierasz.</string>
+    <string name="title_activity_license">Licenses</string>
 </resources>
