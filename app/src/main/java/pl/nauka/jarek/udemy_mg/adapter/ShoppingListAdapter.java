@@ -62,9 +62,9 @@ public class ShoppingListAdapter extends ArrayAdapter {
             public void onClick(View v) {           //akcja na selected czyli CheckBox
                 spinnerItems.add(listItems.get(position));  //pobieranie z listy i dodanie do spinnera
 
-                spinnerItems.remove("");             //?
-                spinnerItems.add((String) "");          //?
-                spinner.setSelection(spinnerItems.indexOf(""));     //?
+//                spinnerItems.remove("");             //?
+//                spinnerItems.add((String) "");          //?
+//                spinner.setSelection(spinnerItems.indexOf(""));     //?
 
                 spinnerAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
                 listItems.remove(position);       //usunięcie elementu z listy

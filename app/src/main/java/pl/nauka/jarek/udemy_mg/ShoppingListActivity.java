@@ -6,9 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pl.nauka.jarek.udemy_mg.adapter.ShoppingListAdapter;
 
 public class ShoppingListActivity extends AppCompatActivity {
@@ -31,6 +32,8 @@ public class ShoppingListActivity extends AppCompatActivity {
     ListView itemList;
     @BindView(R.id.itemSpinner)
     Spinner itemSpinner;
+    @BindView(R.id.deleteButton)
+    ImageButton deleteButton;
     private List<String> listItems;     //lista zwykła
     private List<String> spinnerItems;  //lista rozwijana
 
@@ -55,8 +58,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (itemName.getText()!=null && !itemName.getText().toString().trim().isEmpty())
-                {
+                if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty()) {
                     listItems.add(itemName.getText().toString());
                     itemName.setText("");
                     listAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
@@ -68,42 +70,42 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
         String newListItemsString = sp.getString(LIST_ITEMS_KEY, null);     //String z listItems
-        String newSpinnerItemsString= sp.getString(SPINNER_ITEMS_KEY, null);     //String z spinnerItems
+        String newSpinnerItemsString = sp.getString(SPINNER_ITEMS_KEY, null);     //String z spinnerItems
         Gson gson = new Gson();
-        ArrayList newListItems = gson.fromJson(newListItemsString, new TypeToken<ArrayList>() {}.getType());              //zamiana Stringa na ArrayList
-        ArrayList newSpinnerItems = gson.fromJson(newSpinnerItemsString, new TypeToken<ArrayList>() {}.getType());        //zamiana Stringa na ArrayList
+        ArrayList newListItems = gson.fromJson(newListItemsString, new TypeToken<ArrayList>() {
+        }.getType());              //zamiana Stringa na ArrayList
+        ArrayList newSpinnerItems = gson.fromJson(newSpinnerItemsString, new TypeToken<ArrayList>() {
+        }.getType());        //zamiana Stringa na ArrayList
 
-        if (newListItems != null)
-        {
+        if (newListItems != null) {
             listItems = newListItems;
         }
 
-        if (newSpinnerItems != null)
-        {
+        if (newSpinnerItems != null) {
             spinnerItems = newSpinnerItems;
         }
 
-        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_item, spinnerItems);
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerItems);
 
         itemSpinner.setAdapter(spinnerAdapter);
-        itemSpinner.setSelection(spinnerItems.indexOf(""));         //TODO Naprawiony bład
+//        itemSpinner.setSelection(spinnerItems.indexOf(""));         //TODO Naprawiony bład
 
-        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {       //przenoszenie pozycji ze spinnera do listy zwykłej
-
-                if (!spinnerItems.get(position).equals("")){
-                    itemName.setText(spinnerItems.get(position));
-                    spinnerItems.remove(position);
-                    spinnerAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {       //przenoszenie pozycji ze spinnera do listy zwykłej
+//
+//                itemName.setText(spinnerItems.get(position));
+//                spinnerItems.remove(position);
+//                spinnerAdapter.notifyDataSetChanged();
+////                if (!spinnerItems.get(position).equals("")){
+////                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, listItems, spinnerAdapter, spinnerItems, itemSpinner);
         itemList.setAdapter(listAdapter);   //ustawienie adaptera na itemList //wrzucenie danych do zwyklej listy w aplikacji za pomocą ShoppingListAdapter
@@ -123,5 +125,10 @@ public class ShoppingListActivity extends AppCompatActivity {
         editor.apply();                                                     //zapis równoległy bez blokady wątku
     }
 
+    @OnClick(R.id.deleteButton)
+    public void onClickDelete() {
+        spinnerItems.clear();
+        spinnerAdapter.notifyDataSetChanged();
+    }
 }
 
