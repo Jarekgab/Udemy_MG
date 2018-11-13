@@ -12,7 +12,7 @@
     <string name="title_activity_shopping_list">Shopping list</string>
     <string name="title_activity_draw_layout">Drawing</string>
     <string name="title_activity_api_layout">API</string>
-    <string name="title_activity_api_example_layout">API example</string>
+    <string name="title_activity_api_example_layout">Multithreading</string>
     <string name="clear_button">CLEAR</string>
     <string name="title_activity_about">About the application</string>
     <string name="description">Opanowałeś już javę, ale jeszcze masz przed sobą pierwszą aplikację mobilną? Zaczynasz programować, ale czujesz, że chcesz rozwijać się szybciej?
@@ -20,4 +20,10 @@
         aż ktoś inny zrealizuje pomysł, który wpadł Ci do głowy. Aplikacja wykorzysta chociażby zewnętrzne API, nauczysz się, jak ją zamieścić w sklepie Play,
         pochwalisz się pracodawcy lub zaczniesz na niej zarabiać. Ty wybierasz.</string>
     <string name="title_activity_license">Licenses</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Udemy kurs</string>
+    <string name="nav_header_subtitle">Praktyczny podstawowy kurs programowania Android</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_shopping_list"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="@string/title_activity_shopping_list" />
+        <item
+            android:id="@+id/nav_draw"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="@string/draw_button" />
+        <item
+            android:id="@+id/nav_draw_layout"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="@string/draw_button_layout" />
+        <item
+            android:id="@+id/nav_api"
+            android:icon="@android:drawable/ic_menu_save"
+            android:title="@string/api_button" />
+
+        <item
+            android:id="@+id/nav_api_example"
+            android:icon="@android:drawable/ic_lock_idle_low_battery"
+            android:title="@string/title_activity_api_example_layout" />
+
+        <item
+            android:id="@+id/nav_view"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="@string/view_button" />
+
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/info_button" />
+
+    </group>
+
+</menu>

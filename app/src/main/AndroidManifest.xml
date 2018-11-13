@@ -50,8 +50,15 @@
         <activity
             android:name=".ApiActivityExample"
             android:label="@string/title_activity_api_example_layout" />
-        <activity android:name=".ViewActivity" />
-
+        <activity
+            android:name=".ViewActivity"
+            android:label="@string/title_activity_draw_layout"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.nauka.jarek.udemy_mg.MainActivity" />
+        </activity>
         <receiver android:name=".common.ConnectivityChange">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

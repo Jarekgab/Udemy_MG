@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +24,10 @@ public class ViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
         ButterKnife.bind(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dayView.setBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         dayView.setBorderColor(ContextCompat.getColor(this, R.color.colorPrimary));
