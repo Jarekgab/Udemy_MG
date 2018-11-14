@@ -39,6 +39,7 @@ dependencies {
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation "com.android.support:customtabs:28.0.0"
     implementation 'net.yslibrary.licenseadapter:licenseadapter:1.4.0'
+    implementation group: 'com.beardedhen', name: 'androidbootstrap', version: '2.3.2'
 
 
     configurations {

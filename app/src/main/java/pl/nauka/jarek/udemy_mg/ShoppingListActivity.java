@@ -7,11 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.beardedhen.androidbootstrap.BootstrapEditText;
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -21,25 +22,30 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 import pl.nauka.jarek.udemy_mg.adapter.ShoppingListAdapter;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.itemName_ET)
-    EditText itemName;
     @BindView(R.id.itemList)
     ListView itemList;
     @BindView(R.id.itemSpinner)
     Spinner itemSpinner;
     @BindView(R.id.deleteButton)
     ImageButton deleteButton;
+    @BindView(R.id.itemName_ET)
+    BootstrapEditText itemName;
+    @BindView(R.id.deleteItemButton)
+    ImageButton deleteItemButton;
+
+
     private List<String> listItems;     //lista zwykła
     private List<String> spinnerItems;  //lista rozwijana
 
     private static final String LIST_ITEMS_KEY = "LIST_ITEMS_KEY";
     private static final String SPINNER_ITEMS_KEY = "SPINNER_ITEMS_KEY";
-    private static final String SHOPPING_LIST_KEY = "SHOPPING_LIST_KEY";
+    private static final String shopping_list_key = "SHOPPING_LIST_KEY";
     private ShoppingListAdapter listAdapter; //łączy 2 różne interfejsy: List<String> listItems i ListView itemList
     private ArrayAdapter<String> spinnerAdapter; //tutaj wystarczy zwykły adapter
 
@@ -50,11 +56,12 @@ public class ShoppingListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        TypefaceProvider.registerDefaultIconSets();
 
         listItems = new ArrayList<>();
         spinnerItems = new ArrayList<>();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,13 +116,13 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, listItems, spinnerAdapter, spinnerItems, itemSpinner);
         itemList.setAdapter(listAdapter);   //ustawienie adaptera na itemList //wrzucenie danych do zwyklej listy w aplikacji za pomocą ShoppingListAdapter
-
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
+
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -129,6 +136,22 @@ public class ShoppingListActivity extends AppCompatActivity {
     public void onClickDelete() {
         spinnerItems.clear();
         spinnerAdapter.notifyDataSetChanged();
+    }
+
+    @OnFocusChange(R.id.itemName_ET)
+    void onFocusChanged(boolean focused) {
+
+        if (focused == true) {
+            itemName.setText("");
+        } else {
+            itemName.setText("Podaj nazwę produktu");
+        }
+    }
+
+    @OnClick(R.id.deleteItemButton)
+    public void onClickItemDelete() {
+        if (!itemName.getText().toString().equals("Podaj nazwę produktu"))
+        itemName.setText("");
     }
 }
 

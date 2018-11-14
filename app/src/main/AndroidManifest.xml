@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="stateHidden"
             android:name=".ShoppingListActivity"
             android:label="@string/title_activity_shopping_list"
             android:parentActivityName=".MainActivity"
