@@ -62,7 +62,6 @@ public class ShoppingListAdapter extends ArrayAdapter {
         //w rowView mamy dostęp do elementów row_shopping_list
 
         final TextView name = rowView.findViewById(R.id.name_ET);
-
         name.setText(listItems.get(position).getName());
         name.setTextColor(listItems.get(position).getColor());
 
@@ -74,14 +73,14 @@ public class ShoppingListAdapter extends ArrayAdapter {
             public void onClick(View v) {
                 if (selected.isChecked() == true) {
 
-                    listItems.get(position).setColor(Color.RED);
+                    listItems.get(position).setRed();
                     name.setText(listItems.get(position).getName());
                     name.setTextColor(listItems.get(position).getColor());
 
                     listItems.get(position).setClassChecked(true);
                     selected.setChecked(listItems.get(position).getClassChecked());
                 } else {
-                    listItems.get(position).setColor(Color.BLACK);
+                    listItems.get(position).setBlack();
                     name.setText(listItems.get(position).getName());
                     name.setTextColor(listItems.get(position).getColor());
 

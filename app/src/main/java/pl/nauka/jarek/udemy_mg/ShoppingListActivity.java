@@ -55,7 +55,6 @@ public class ShoppingListActivity extends AppCompatActivity {
     private static final String shopping_list_key = "SHOPPING_LIST_KEY";
     private ShoppingListAdapter listAdapter; //łączy 2 różne interfejsy: List<String> listItems i ListView itemList
     private ArrayAdapter<String> spinnerAdapter; //tutaj wystarczy zwykły adapter
-    private Boolean checked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty() && !itemName.getText().toString().equals("Podaj nazwę produktu")){
-                    listItems.add(new NameColor(itemName.getText().toString(), Color.BLACK, false));
+                    listItems.add(new NameColor(itemName.getText().toString(), Color.BLACK,false));
                     itemName.setText("");
                     listAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
                 }
@@ -142,9 +141,16 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     @OnClick(R.id.deleteButton)
     public void onClickDelete() {
-        listItems.clear();
-        listAdapter.notifyDataSetChanged();
+
+        for (int i = 0; i < listItems.size(); i++) {
+            listAdapter.notifyDataSetChanged();
+            if (listItems.get(i).getClassChecked() == true) {
+                listItems.remove(i);
+                i--;
+            }
+        }
     }
+
 
     @OnFocusChange(R.id.itemName_ET)
     void onFocusChanged(boolean focused) {
