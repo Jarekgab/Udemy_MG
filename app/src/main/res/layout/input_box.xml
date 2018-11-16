@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bootstrap_gray">
+
+
+    <TextView
+        android:id="@+id/txtmessage"
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:padding="10dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtinput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/txtmessage"
+        app:layout_constraintStart_toStartOf="@+id/txtmessage"
+        app:layout_constraintTop_toBottomOf="@+id/txtmessage" />
+
+    <Button
+        android:id="@+id/btdone"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bootstrap_brand_danger"
+        android:text="Done"
+        app:layout_constraintEnd_toEndOf="@+id/txtinput"
+        app:layout_constraintStart_toStartOf="@+id/txtinput"
+        app:layout_constraintTop_toBottomOf="@+id/txtinput" />
+
+</android.support.constraint.ConstraintLayout>

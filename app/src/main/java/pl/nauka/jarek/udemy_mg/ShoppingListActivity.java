@@ -1,6 +1,8 @@
 package pl.nauka.jarek.udemy_mg;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
@@ -67,7 +71,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty()) {
+                if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty() && !itemName.getText().toString().equals("Podaj nazwę produktu")){
                     listItems.add(itemName.getText().toString());
                     itemName.setText("");
                     listAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
@@ -116,7 +120,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 //            }
 //        });
 
-        listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, listItems, spinnerAdapter, spinnerItems, itemSpinner);
+        listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, listItems, spinnerAdapter, spinnerItems, itemSpinner, itemList);
         itemList.setAdapter(listAdapter);   //ustawienie adaptera na itemList //wrzucenie danych do zwyklej listy w aplikacji za pomocą ShoppingListAdapter
     }
 
@@ -172,6 +176,19 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            Dialog dialog = new Dialog(this);
+            dialog.setTitle("Input Box");
+            dialog.setContentView(R.layout.input_box);
+            TextView txtMessage=(TextView)dialog.findViewById(R.id.txtmessage);
+            txtMessage.setText("Update item");
+            txtMessage.setTextColor(Color.parseColor("#ff2222"));
+            final EditText editText=(EditText)dialog.findViewById(R.id.txtinput);
+
+            dialog.show();
+
+
+
             return true;
         }
 
