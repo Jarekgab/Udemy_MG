@@ -6,13 +6,15 @@ public class NameColor {
 
     String name;
     int color;
+    Boolean checked;
 
     int red = R.color.red;
     int blac = R.color.black;
 
-    public NameColor(String name, int color){
+    public NameColor(String name, int color, Boolean checked){
         this.name = name;
         this.color = color;
+        this.checked = checked;
 
     }
 
@@ -46,6 +48,14 @@ public class NameColor {
 
     public int getBlac() {
         return blac;
+    }
+
+    public void setClassChecked(Boolean checked) {
+        this.checked = checked;
+    }
+
+    public Boolean getClassChecked() {
+        return checked;
     }
 
 }

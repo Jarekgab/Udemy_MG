@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import pl.nauka.jarek.udemy_mg.adapter.ShoppingListAdapter;
+import pl.nauka.jarek.udemy_mg.model.NameColor;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
@@ -46,7 +47,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     ImageButton deleteItemButton;
 
 
-    private List<String> listItems;     //lista zwykła
+    private List<NameColor> listItems;     //lista zwykła
     private List<String> spinnerItems;  //lista rozwijana
 
     private static final String LIST_ITEMS_KEY = "LIST_ITEMS_KEY";
@@ -54,6 +55,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     private static final String shopping_list_key = "SHOPPING_LIST_KEY";
     private ShoppingListAdapter listAdapter; //łączy 2 różne interfejsy: List<String> listItems i ListView itemList
     private ArrayAdapter<String> spinnerAdapter; //tutaj wystarczy zwykły adapter
+    private Boolean checked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty() && !itemName.getText().toString().equals("Podaj nazwę produktu")){
-                    listItems.add(itemName.getText().toString());
+                    listItems.add(new NameColor(itemName.getText().toString(), Color.BLACK, false));
                     itemName.setText("");
                     listAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
                 }
@@ -81,22 +83,22 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        String newListItemsString = sp.getString(LIST_ITEMS_KEY, null);     //String z listItems
-        String newSpinnerItemsString = sp.getString(SPINNER_ITEMS_KEY, null);     //String z spinnerItems
-        Gson gson = new Gson();
-        ArrayList newListItems = gson.fromJson(newListItemsString, new TypeToken<ArrayList>() {
-        }.getType());              //zamiana Stringa na ArrayList
-        ArrayList newSpinnerItems = gson.fromJson(newSpinnerItemsString, new TypeToken<ArrayList>() {
-        }.getType());        //zamiana Stringa na ArrayList
-
-        if (newListItems != null) {
-            listItems = newListItems;
-        }
-
-        if (newSpinnerItems != null) {
-            spinnerItems = newSpinnerItems;
-        }
+//        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+//        String newListItemsString = sp.getString(LIST_ITEMS_KEY, null);     //String z listItems
+//        String newSpinnerItemsString = sp.getString(SPINNER_ITEMS_KEY, null);     //String z spinnerItems
+//        Gson gson = new Gson();
+//        ArrayList newListItems = gson.fromJson(newListItemsString, new TypeToken<ArrayList>() {
+//        }.getType());              //zamiana Stringa na ArrayList
+//        ArrayList newSpinnerItems = gson.fromJson(newSpinnerItemsString, new TypeToken<ArrayList>() {
+//        }.getType());        //zamiana Stringa na ArrayList
+//
+//        if (newListItems != null) {
+//            listItems = newListItems;
+//        }
+//
+//        if (newSpinnerItems != null) {
+//            spinnerItems = newSpinnerItems;
+//        }
 
         spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerItems);
 
@@ -129,19 +131,19 @@ public class ShoppingListActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-
-        Gson gson = new Gson();
-        editor.putString(LIST_ITEMS_KEY, gson.toJson(listItems));           //Gson zamienia na String
-        editor.putString(SPINNER_ITEMS_KEY, gson.toJson(spinnerItems));     //Gson zamienia na String
-        editor.apply();                                                     //zapis równoległy bez blokady wątku
+//        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sp.edit();
+//
+//        Gson gson = new Gson();
+//        editor.putString(LIST_ITEMS_KEY, gson.toJson(listItems));           //Gson zamienia na String
+//        editor.putString(SPINNER_ITEMS_KEY, gson.toJson(spinnerItems));     //Gson zamienia na String
+//        editor.apply();                                                     //zapis równoległy bez blokady wątku
     }
 
     @OnClick(R.id.deleteButton)
     public void onClickDelete() {
-        spinnerItems.clear();
-        spinnerAdapter.notifyDataSetChanged();
+        listItems.clear();
+        listAdapter.notifyDataSetChanged();
     }
 
     @OnFocusChange(R.id.itemName_ET)
