@@ -208,9 +208,19 @@ public class ShoppingListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_new_list) {
 
             createDialog();
+            return true;
+        }
+
+        if (id == R.id.action_remove_list) {
+
+            spinnerItems.remove(itemSpinner.getSelectedItemPosition());
+            spinnerList.remove(itemSpinner.getSelectedItemPosition());
+            spinnerAdapter.notifyDataSetChanged();
+            listAdapter.notifyDataSetChanged();
+            //TODO Przestawić itemSpinner na inne pole albo wyczyścić listView
 
             return true;
         }
@@ -241,18 +251,14 @@ public class ShoppingListActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spinnerItems.add(dialogListNameET.getText().toString());
+                spinnerList.add(new ArrayList<ShoppingListElement>());
 
-                //TODO Uzupełnić okno dodawania listy zakupów
-
-//                spinnerItems.add(dialogListNameET.getText().toString());
-//
-////                spinnerItems.add(new ShoppingListElement());
-//                spinnerAdapter.notifyDataSetChanged();
-
+               //TODO itemSpinner.setSelection();  na nowe pole
+                dialog.dismiss();
             }
         });
         dialog.show();
     }
-
 }
 
