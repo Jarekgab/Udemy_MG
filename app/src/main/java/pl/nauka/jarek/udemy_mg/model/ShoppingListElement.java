@@ -2,8 +2,9 @@ package pl.nauka.jarek.udemy_mg.model;
 
 import android.graphics.Color;
 
-public class NameColor {
+public class ShoppingListElement {
 
+    private String shoppingListName;
     private String name;
     private int color;
     private Boolean checked;
@@ -11,10 +12,15 @@ public class NameColor {
     private int red = Color.RED;
     private int black = Color.BLACK;
 
-    public NameColor(String name, int color, Boolean checked){
+    public ShoppingListElement(String shoppingListName, String name, int color, Boolean checked){
+        this.shoppingListName = shoppingListName;
         this.name = name;
         this.color = color;
         this.checked = checked;
+    }
+
+    public String getShoppingListName() {
+        return shoppingListName;
     }
 
     public String getName() {

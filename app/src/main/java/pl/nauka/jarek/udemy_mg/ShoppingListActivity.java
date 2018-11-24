@@ -1,7 +1,6 @@
 package pl.nauka.jarek.udemy_mg;
 
 import android.app.Dialog;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,7 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -19,8 +20,6 @@ import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import pl.nauka.jarek.udemy_mg.adapter.ShoppingListAdapter;
-import pl.nauka.jarek.udemy_mg.model.NameColor;
+import pl.nauka.jarek.udemy_mg.model.ShoppingListElement;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
@@ -47,7 +46,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     ImageButton deleteItemButton;
 
 
-    private List<NameColor> listItems;     //lista zwykła
+    //private List<ShoppingListElement> listItems;     //lista zwykła
     private List<String> spinnerItems;  //lista rozwijana
 
     private static final String LIST_ITEMS_KEY = "LIST_ITEMS_KEY";
@@ -55,6 +54,9 @@ public class ShoppingListActivity extends AppCompatActivity {
     private static final String shopping_list_key = "SHOPPING_LIST_KEY";
     private ShoppingListAdapter listAdapter; //łączy 2 różne interfejsy: List<String> listItems i ListView itemList
     private ArrayAdapter<String> spinnerAdapter; //tutaj wystarczy zwykły adapter
+
+    private List<List<ShoppingListElement>> spinnerList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,24 +66,71 @@ public class ShoppingListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TypefaceProvider.registerDefaultIconSets();
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        listItems = new ArrayList<>();
+        //listItems = new ArrayList<>();
+
         spinnerItems = new ArrayList<>();
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        if (spinnerItems.isEmpty()){
+            spinnerItems.add("Lista zakupów 1");
+            spinnerItems.add("Lista zakupów 2");
+            spinnerItems.add("Lista zakupów 3");
+            spinnerList = new ArrayList<>();
+            spinnerList.add(new ArrayList<ShoppingListElement>());
+            spinnerList.add(new ArrayList<ShoppingListElement>());
+            spinnerList.add(new ArrayList<ShoppingListElement>());
+        }
+
+
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerItems);
+        itemSpinner.setAdapter(spinnerAdapter);
+
+        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {       //przenoszenie pozycji ze spinnera do listy zwykłej
+
+                listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(position));
+                itemList.setAdapter(listAdapter);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty() && !itemName.getText().toString().equals("Podaj nazwę produktu")){
-                    listItems.add(new NameColor(itemName.getText().toString(), Color.BLACK,false));
+                if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty() && !itemName.getText().toString().equals("Podaj nazwę produktu")) {
+
+                    ShoppingListElement shoppingListElement = new ShoppingListElement(itemSpinner.getSelectedItem().toString(), itemName.getText().toString(), Color.BLACK, false);
                     itemName.setText("");
-                    listAdapter.notifyDataSetChanged();     //powiadamia adapter o zmienie danych
+
+                    spinnerList.get(itemSpinner.getSelectedItemPosition()).add(shoppingListElement);
+
+//                    if (itemSpinner.getSelectedItem().equals("Lista zakupów 1")){
+//                        spinnerList.get(0).add(shoppingListElement);
+//                    }
+//
+//                    if (itemSpinner.getSelectedItem().equals("Lista zakupów 2")){
+//                        spinnerList.get(1).add(shoppingListElement);
+//                    }
+//
+//                    if (itemSpinner.getSelectedItem().equals("Lista zakupów 3")){
+//                        spinnerList.get(2).add(shoppingListElement);
+//                    }
+
+                    listAdapter.notifyDataSetChanged();
                 }
             }
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+//
 //        SharedPreferences sp = getPreferences(MODE_PRIVATE);
 //        String newListItemsString = sp.getString(LIST_ITEMS_KEY, null);     //String z listItems
 //        String newSpinnerItemsString = sp.getString(SPINNER_ITEMS_KEY, null);     //String z spinnerItems
@@ -99,29 +148,8 @@ public class ShoppingListActivity extends AppCompatActivity {
 //            spinnerItems = newSpinnerItems;
 //        }
 
-        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerItems);
 
-        itemSpinner.setAdapter(spinnerAdapter);
-//        itemSpinner.setSelection(spinnerItems.indexOf(""));         //TODO Naprawiony bład
-
-//        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {       //przenoszenie pozycji ze spinnera do listy zwykłej
-//
-//                itemName.setText(spinnerItems.get(position));
-//                spinnerItems.remove(position);
-//                spinnerAdapter.notifyDataSetChanged();
-////                if (!spinnerItems.get(position).equals("")){
-////                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-
-        listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, listItems, spinnerAdapter, spinnerItems, itemSpinner, itemList);
+        listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, spinnerList.get(0));
         itemList.setAdapter(listAdapter);   //ustawienie adaptera na itemList //wrzucenie danych do zwyklej listy w aplikacji za pomocą ShoppingListAdapter
     }
 
@@ -142,14 +170,15 @@ public class ShoppingListActivity extends AppCompatActivity {
     @OnClick(R.id.deleteButton)
     public void onClickDelete() {
 
-        for (int i = 0; i < listItems.size(); i++) {
-            listAdapter.notifyDataSetChanged();
-            if (listItems.get(i).getClassChecked() == true) {
-                listItems.remove(i);
-                i--;
-            }
-        }
+//        for (int i = 0; i < listItems.size(); i++) {
+//            if (listItems.get(i).getClassChecked() == true) {
+//                listItems.remove(i);
+//                i--;
+//            }
+//        }
+//        listAdapter.notifyDataSetChanged();
     }
+
 
 
     @OnFocusChange(R.id.itemName_ET)
@@ -162,11 +191,6 @@ public class ShoppingListActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.deleteItemButton)
-    public void onClickItemDelete() {
-        if (!itemName.getText().toString().equals("Podaj nazwę produktu"))
-        itemName.setText("");
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -185,22 +209,56 @@ public class ShoppingListActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Dialog dialog = new Dialog(this);
-            dialog.setTitle("Input Box");
-            dialog.setContentView(R.layout.input_box);
-            TextView txtMessage=(TextView)dialog.findViewById(R.id.txtmessage);
-            txtMessage.setText("Update item");
-            txtMessage.setTextColor(Color.parseColor("#ff2222"));
-            final EditText editText=(EditText)dialog.findViewById(R.id.txtinput);
-
-            dialog.show();
-
-
+            createDialog();
 
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void createDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setTitle("Input Box");
+        dialog.setContentView(R.layout.input_box);
+        TextView dialogListNameTV = (TextView) dialog.findViewById(R.id.listNameTextView);
+        final EditText dialogListNameET = (EditText) dialog.findViewById(R.id.listNameEditText);
+
+        dialogListNameTV.setText("Nazwa listy");
+        dialogListNameTV.setTextColor(Color.WHITE);
+
+        Button cancelButton= (Button) dialog.findViewById(R.id.cancelButton);
+        Button saveButton= (Button) dialog.findViewById(R.id.saveButton);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //TODO Uzupełnić okno dodawania listy zakupów
+
+//                spinnerItems.add(dialogListNameET.getText().toString());
+//
+////                spinnerItems.add(new ShoppingListElement());
+//                spinnerAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private String getCurrentList(){
+        return (String) itemSpinner.getSelectedItem();
+    }
+
+
 }
 

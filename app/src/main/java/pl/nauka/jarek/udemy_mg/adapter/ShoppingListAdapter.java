@@ -1,8 +1,6 @@
 package pl.nauka.jarek.udemy_mg.adapter;
 
-import android.app.LauncherActivity;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,36 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
 
 import pl.nauka.jarek.udemy_mg.R;
-import pl.nauka.jarek.udemy_mg.model.NameColor;
+import pl.nauka.jarek.udemy_mg.model.ShoppingListElement;
 
 
 public class ShoppingListAdapter extends ArrayAdapter {
-    private List<NameColor> listItems;
+    private List<ShoppingListElement> listItems;
     private Context context;
     private int resource;
-    ArrayAdapter<String> spinnerAdapter;
-    List<String> spinnerItems;
-    Spinner spinner;
-    ListView itemList;
 
 
-    public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<NameColor> listItems, ArrayAdapter<String> spinnerAdapter, List<String> spinnerItems, Spinner spinner, ListView iteamList) {
+    public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<ShoppingListElement> listItems) {
         super(context, resource, listItems);
         this.context = context;
         this.resource = resource;
         this.listItems = listItems;
-        this.spinnerAdapter = spinnerAdapter;
-        this.spinnerItems = spinnerItems;
-        this.spinner = spinner;
-        this.itemList = iteamList;
 
     }
 
@@ -50,19 +37,20 @@ public class ShoppingListAdapter extends ArrayAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         /*
-        * //Tworzenie pliku XML układu odpowiedniego obiektu//
-        * Należy pobrać LayoutInflater, który jest już podłączony do bieżącego kontekstu
-        * i poprawnie skonfigurowany dla urządzenia:
-        *
-        * LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        */
+         * //Tworzenie pliku XML układu odpowiedniego obiektu//
+         * Należy pobrać LayoutInflater, który jest już podłączony do bieżącego kontekstu
+         * i poprawnie skonfigurowany dla urządzenia:
+         *
+         * LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+         */
 
         View rowView = inflater.inflate(R.layout.row_shopping_list, parent, false);
         //ustawienie widoku naszego wiersza
         //w rowView mamy dostęp do elementów row_shopping_list
 
         final TextView name = rowView.findViewById(R.id.name_ET);
-        name.setText(listItems.get(position).getName());
+
+        name.setText(listItems.get(position).getShoppingListName() + " - " + listItems.get(position).getName());
         name.setTextColor(listItems.get(position).getColor());
 
         final CheckBox selected = rowView.findViewById(R.id.selected_CB);
@@ -74,14 +62,14 @@ public class ShoppingListAdapter extends ArrayAdapter {
                 if (selected.isChecked() == true) {
 
                     listItems.get(position).setRed();
-                    name.setText(listItems.get(position).getName());
+                    name.setText(listItems.get(position).getShoppingListName() + " - " + listItems.get(position).getName());
                     name.setTextColor(listItems.get(position).getColor());
 
                     listItems.get(position).setClassChecked(true);
                     selected.setChecked(listItems.get(position).getClassChecked());
                 } else {
                     listItems.get(position).setBlack();
-                    name.setText(listItems.get(position).getName());
+                    name.setText(listItems.get(position).getShoppingListName() + " - " + listItems.get(position).getName());
                     name.setTextColor(listItems.get(position).getColor());
 
                     listItems.get(position).setClassChecked(false);
@@ -92,8 +80,5 @@ public class ShoppingListAdapter extends ArrayAdapter {
         });
 
         return rowView;
+    }
 }
-
-
-}
-//TODO 1.Usunięcie pustego miejsca w spinner
