@@ -170,13 +170,14 @@ public class ShoppingListActivity extends AppCompatActivity {
     @OnClick(R.id.deleteButton)
     public void onClickDelete() {
 
-//        for (int i = 0; i < listItems.size(); i++) {
-//            if (listItems.get(i).getClassChecked() == true) {
-//                listItems.remove(i);
-//                i--;
-//            }
-//        }
-//        listAdapter.notifyDataSetChanged();
+        List<ShoppingListElement> selectedView = spinnerList.get(itemSpinner.getSelectedItemPosition());
+        for (int i = 0; i < selectedView.size(); i++) {
+            if (selectedView.get(i).getClassChecked() == true) {
+                selectedView.remove(i);
+                i--;
+            }
+        }
+        listAdapter.notifyDataSetChanged();
     }
 
 
@@ -250,15 +251,8 @@ public class ShoppingListActivity extends AppCompatActivity {
 
             }
         });
-
-
         dialog.show();
     }
-
-    private String getCurrentList(){
-        return (String) itemSpinner.getSelectedItem();
-    }
-
 
 }
 
