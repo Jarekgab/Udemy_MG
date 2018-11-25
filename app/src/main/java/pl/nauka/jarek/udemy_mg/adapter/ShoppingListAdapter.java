@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -49,27 +50,35 @@ public class ShoppingListAdapter extends ArrayAdapter {
         //w rowView mamy dostęp do elementów row_shopping_list
 
         final TextView name = rowView.findViewById(R.id.name_ET);
+        final LinearLayout rowShoppingListLL = rowView.findViewById(R.id.row_shopping_list_ll);
 
-        name.setText(listItems.get(position).getShoppingListName() + " - " + listItems.get(position).getName());
+        name.setText(listItems.get(position).getName());
         name.setTextColor(listItems.get(position).getColor());
 
         final CheckBox selected = rowView.findViewById(R.id.selected_CB);
         selected.setChecked(listItems.get(position).getClassChecked());
 
-        selected.setOnClickListener(new View.OnClickListener() {
+        rowShoppingListLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (selected.isChecked() == false){
+                    selected.setChecked(true);
+                }else {
+                    selected.setChecked(false);
+                }
+
+
                 if (selected.isChecked() == true) {
 
                     listItems.get(position).setRed();
-                    name.setText(listItems.get(position).getShoppingListName() + " - " + listItems.get(position).getName());
+                    name.setText(listItems.get(position).getName());
                     name.setTextColor(listItems.get(position).getColor());
 
                     listItems.get(position).setClassChecked(true);
                     selected.setChecked(listItems.get(position).getClassChecked());
                 } else {
                     listItems.get(position).setBlack();
-                    name.setText(listItems.get(position).getShoppingListName() + " - " + listItems.get(position).getName());
+                    name.setText(listItems.get(position).getName());
                     name.setTextColor(listItems.get(position).getColor());
 
                     listItems.get(position).setClassChecked(false);

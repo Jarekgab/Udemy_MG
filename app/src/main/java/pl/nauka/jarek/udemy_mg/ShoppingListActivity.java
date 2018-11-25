@@ -105,7 +105,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty() && !itemName.getText().toString().equals("Podaj nazwę produktu")) {
 
-                    ShoppingListElement shoppingListElement = new ShoppingListElement(itemSpinner.getSelectedItem().toString(), itemName.getText().toString(), Color.BLACK, false);
+                    ShoppingListElement shoppingListElement = new ShoppingListElement(itemName.getText().toString(), Color.BLACK, false);
                     itemName.setText("");
 
                     spinnerList.get(itemSpinner.getSelectedItemPosition()).add(shoppingListElement);

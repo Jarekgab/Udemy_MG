@@ -4,7 +4,6 @@ import android.graphics.Color;
 
 public class ShoppingListElement {
 
-    private String shoppingListName;
     private String name;
     private int color;
     private Boolean checked;
@@ -12,15 +11,10 @@ public class ShoppingListElement {
     private int red = Color.RED;
     private int black = Color.BLACK;
 
-    public ShoppingListElement(String shoppingListName, String name, int color, Boolean checked){
-        this.shoppingListName = shoppingListName;
+    public ShoppingListElement(String name, int color, Boolean checked){
         this.name = name;
         this.color = color;
         this.checked = checked;
-    }
-
-    public String getShoppingListName() {
-        return shoppingListName;
     }
 
     public String getName() {
