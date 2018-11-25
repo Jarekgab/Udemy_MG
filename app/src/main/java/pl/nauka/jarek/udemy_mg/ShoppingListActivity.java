@@ -2,6 +2,7 @@ package pl.nauka.jarek.udemy_mg;
 
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
@@ -73,11 +75,9 @@ public class ShoppingListActivity extends AppCompatActivity {
         spinnerItems = new ArrayList<>();
 
         if (spinnerItems.isEmpty()){
-            spinnerItems.add("Lista zakupów 1");
+            spinnerItems.add("Lista główna");
             spinnerItems.add("Lista zakupów 2");
-            spinnerItems.add("Lista zakupów 3");
             spinnerList = new ArrayList<>();
-            spinnerList.add(new ArrayList<ShoppingListElement>());
             spinnerList.add(new ArrayList<ShoppingListElement>());
             spinnerList.add(new ArrayList<ShoppingListElement>());
         }
@@ -216,12 +216,33 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         if (id == R.id.action_remove_list) {
 
-            spinnerItems.remove(itemSpinner.getSelectedItemPosition());
-            spinnerList.remove(itemSpinner.getSelectedItemPosition());
-            spinnerAdapter.notifyDataSetChanged();
-            listAdapter.notifyDataSetChanged();
-            //TODO Przestawić itemSpinner na inne pole albo wyczyścić listView
+            if (!spinnerItems.isEmpty() && itemSpinner.getSelectedItemPosition() > 0){
+                spinnerItems.remove(itemSpinner.getSelectedItemPosition());
+                spinnerList.remove(itemSpinner.getSelectedItemPosition());
 
+                itemSpinner.setSelection(0);
+                listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(0));
+                itemList.setAdapter(listAdapter);
+
+            }else if (!spinnerItems.isEmpty() && itemSpinner.getSelectedItemPosition() == 0){
+
+                spinnerList.get(itemSpinner.getSelectedItemPosition()).clear();
+                itemSpinner.setSelection(0);
+                listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(0));
+                itemList.setAdapter(listAdapter);
+
+//                Toast.makeText(this,"Nie można usuwać głównej listy", Toast.LENGTH_LONG).show();
+
+                Toast toast = Toast.makeText(this, "Nie można usuwać głównej listy", Toast.LENGTH_LONG);
+                View view = toast.getView();
+
+                view.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                TextView text = view.findViewById(android.R.id.message);
+                text.setTextColor(Color.WHITE);
+                toast.show();
+            }
+            listAdapter.notifyDataSetChanged();
+            spinnerAdapter.notifyDataSetChanged();
             return true;
         }
 
@@ -230,7 +251,6 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     private void createDialog() {
         final Dialog dialog = new Dialog(this);
-        dialog.setTitle("Input Box");
         dialog.setContentView(R.layout.input_box);
         TextView dialogListNameTV = (TextView) dialog.findViewById(R.id.listNameTextView);
         final EditText dialogListNameET = (EditText) dialog.findViewById(R.id.listNameEditText);
@@ -253,9 +273,16 @@ public class ShoppingListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 spinnerItems.add(dialogListNameET.getText().toString());
                 spinnerList.add(new ArrayList<ShoppingListElement>());
+                
+                int newField = spinnerItems.size()-1;
 
-               //TODO itemSpinner.setSelection();  na nowe pole
+                itemSpinner.setSelection(newField);
+                listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(newField));
+                itemList.setAdapter(listAdapter);
+
                 dialog.dismiss();
+                Toast.makeText(ShoppingListActivity.this,"Dodano nową liste: " + dialogListNameET.getText().toString(), Toast.LENGTH_LONG).show();
+
             }
         });
         dialog.show();
