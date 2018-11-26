@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Udemy_MG</string>
+    <string name="app_name">Udemy_JG</string>
     <string name="action_settings">Ustawienia</string>
     <string name="shopping_list_button">Lista zakupów</string>
     <string name="draw_button">Rysowanie</string>

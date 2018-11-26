@@ -1,7 +1,6 @@
 package pl.nauka.jarek.udemy_mg;
 
 import android.app.Dialog;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -23,8 +22,6 @@ import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +32,9 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import pl.nauka.jarek.udemy_mg.adapter.ShoppingListAdapter;
 import pl.nauka.jarek.udemy_mg.model.ShoppingListElement;
+import pl.nauka.jarek.udemy_mg.util.SharedPreferencesSaver;
 
 public class ShoppingListActivity extends AppCompatActivity {
-
 
     @BindView(R.id.itemList)
     ListView itemList;
@@ -50,9 +47,6 @@ public class ShoppingListActivity extends AppCompatActivity {
     @BindView(R.id.deleteItemButton)
     ImageButton deleteItemButton;
 
-
-    private static final String LIST_ITEMS_KEY = "LIST_ITEMS_KEY";
-    private static final String SPINNER_ITEMS_KEY = "SPINNER_ITEMS_KEY";
     private List<String> spinnerItems;  //lista rozwijana
     private List<List<ShoppingListElement>> spinnerList;
     private ShoppingListAdapter listAdapter; //łączy 2 różne interfejsy: List<String> listItems i ListView itemList
@@ -77,15 +71,8 @@ public class ShoppingListActivity extends AppCompatActivity {
             spinnerList.add(new ArrayList<ShoppingListElement>());
         }
 
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        String newSpinnerListString = sp.getString(LIST_ITEMS_KEY, null);     //String z listItems
-        String newSpinnerItemsString = sp.getString(SPINNER_ITEMS_KEY, null);     //String z spinnerItems
-        Gson gson = new Gson();
-
-        List<List<ShoppingListElement>> newSpinnerList = gson.fromJson(newSpinnerListString, new TypeToken<List<List<ShoppingListElement>>>() {
-        }.getType());              //zamiana Stringa na ArrayList
-        List<String> newSpinnerItems = gson.fromJson(newSpinnerItemsString, new TypeToken<List<String>>() {
-        }.getType());        //zamiana Stringa na ArrayList
+        List<List<ShoppingListElement>> newSpinnerList = SharedPreferencesSaver.loadSpinnerL(getPreferences(MODE_PRIVATE));
+        List<String> newSpinnerItems = SharedPreferencesSaver.loadSpinnerI(getPreferences(MODE_PRIVATE));
 
         if (newSpinnerList != null) {
             spinnerList = newSpinnerList;
@@ -125,7 +112,6 @@ public class ShoppingListActivity extends AppCompatActivity {
             }
         });
 
-
         listAdapter = new ShoppingListAdapter(this, R.layout.row_shopping_list, spinnerList.get(0));
         itemList.setAdapter(listAdapter);   //ustawienie adaptera na itemList //wrzucenie danych do zwyklej listy w aplikacji za pomocą ShoppingListAdapter
     }
@@ -134,13 +120,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-
-        Gson gson = new Gson();
-        editor.putString(LIST_ITEMS_KEY, gson.toJson(spinnerList));           //Gson zamienia na String
-        editor.putString(SPINNER_ITEMS_KEY, gson.toJson(spinnerItems));     //Gson zamienia na String
-        editor.apply();                                                     //zapis równoległy bez blokady wątku
+        SharedPreferencesSaver.saveTo(spinnerList, spinnerItems, getPreferences(MODE_PRIVATE));
     }
 
     @OnClick(R.id.deleteButton)
@@ -231,8 +211,8 @@ public class ShoppingListActivity extends AppCompatActivity {
         dialogListNameTV.setText("Nazwa listy");
         dialogListNameTV.setTextColor(Color.WHITE);
 
-        Button cancelButton= (Button) dialog.findViewById(R.id.cancelButton);
-        Button saveButton= (Button) dialog.findViewById(R.id.saveButton);
+        Button cancelButton = (Button) dialog.findViewById(R.id.cancelButton);
+        Button saveButton = (Button) dialog.findViewById(R.id.saveButton);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
