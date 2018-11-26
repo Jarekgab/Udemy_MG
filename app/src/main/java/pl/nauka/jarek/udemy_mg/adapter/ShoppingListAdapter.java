@@ -67,7 +67,6 @@ public class ShoppingListAdapter extends ArrayAdapter {
                     selected.setChecked(false);
                 }
 
-
                 if (selected.isChecked() == true) {
 
                     listItems.get(position).setRed();
