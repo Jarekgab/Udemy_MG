@@ -19,6 +19,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -41,6 +47,7 @@ dependencies {
     implementation "com.android.support:customtabs:28.0.0"
     implementation 'net.yslibrary.licenseadapter:licenseadapter:1.4.0'
     implementation group: 'com.beardedhen', name: 'androidbootstrap', version: '2.3.2'
+    implementation 'com.github.arcadefire:nice-spinner:1.3.4'
 
 
 

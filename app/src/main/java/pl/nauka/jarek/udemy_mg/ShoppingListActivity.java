@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 
+import org.angmarch.views.NiceSpinner;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     @BindView(R.id.itemList)
     ListView itemList;
     @BindView(R.id.itemSpinner)
-    Spinner itemSpinner;
+    NiceSpinner itemSpinner;
     @BindView(R.id.deleteButton)
     ImageButton deleteButton;
     @BindView(R.id.itemName_ET)
@@ -106,7 +108,7 @@ public class ShoppingListActivity extends AppCompatActivity {
                     ShoppingListElement shoppingListElement = new ShoppingListElement(itemName.getText().toString(), Color.BLACK, false);
                     itemName.setText("");
 
-                    spinnerList.get(itemSpinner.getSelectedItemPosition()).add(shoppingListElement);
+                    spinnerList.get(itemSpinner.getSelectedIndex()).add(shoppingListElement);
                     listAdapter.notifyDataSetChanged();
                 }
             }
@@ -126,7 +128,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     @OnClick(R.id.deleteButton)
     public void onClickDelete() {
 
-        List<ShoppingListElement> selectedView = spinnerList.get(itemSpinner.getSelectedItemPosition());
+        List<ShoppingListElement> selectedView = spinnerList.get(itemSpinner.getSelectedIndex());
         for (int i = 0; i < selectedView.size(); i++) {
             if (selectedView.get(i).getClassChecked() == true) {
                 selectedView.remove(i);
@@ -169,18 +171,18 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         if (id == R.id.action_remove_list) {
 
-            if (!spinnerItems.isEmpty() && itemSpinner.getSelectedItemPosition() > 0){
-                spinnerItems.remove(itemSpinner.getSelectedItemPosition());
-                spinnerList.remove(itemSpinner.getSelectedItemPosition());
+            if (!spinnerItems.isEmpty() && itemSpinner.getSelectedIndex() > 0){
+                spinnerItems.remove(itemSpinner.getSelectedIndex());
+                spinnerList.remove(itemSpinner.getSelectedIndex());
 
-                itemSpinner.setSelection(0);
+                itemSpinner.setSelectedIndex(0);
                 listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(0));
                 itemList.setAdapter(listAdapter);
 
-            }else if (!spinnerItems.isEmpty() && itemSpinner.getSelectedItemPosition() == 0){
+            }else if (!spinnerItems.isEmpty() && itemSpinner.getSelectedIndex() == 0){
 
-                spinnerList.get(itemSpinner.getSelectedItemPosition()).clear();
-                itemSpinner.setSelection(0);
+                spinnerList.get(itemSpinner.getSelectedIndex()).clear();
+                itemSpinner.setSelectedIndex(0);
                 listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(0));
                 itemList.setAdapter(listAdapter);
 
@@ -229,7 +231,7 @@ public class ShoppingListActivity extends AppCompatActivity {
                 
                 int newField = spinnerItems.size()-1;
 
-                itemSpinner.setSelection(newField);
+                itemSpinner.setSelectedIndex(newField);
                 listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(newField));
                 itemList.setAdapter(listAdapter);
 
