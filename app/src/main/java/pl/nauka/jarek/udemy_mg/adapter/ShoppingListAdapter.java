@@ -58,30 +58,34 @@ public class ShoppingListAdapter extends ArrayAdapter {
         final CheckBox selected = rowView.findViewById(R.id.selected_CB);
         selected.setChecked(listItems.get(position).getClassChecked());
 
-        rowShoppingListLL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selected.isChecked() == false){
-                    selected.setChecked(true);
-                }else {
-                    selected.setChecked(false);
-                }
+                    rowShoppingListLL.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (selected.isChecked() == false){
+                                selected.setChecked(true);
+                            }else {
+                                selected.setChecked(false);
+                            }
 
-                if (selected.isChecked() == true) {
+                            selected.setFocusable(false);
 
-                    listItems.get(position).setRed();
-                    name.setText(listItems.get(position).getName());
-                    name.setTextColor(listItems.get(position).getColor());
+                            if (selected.isChecked() == true) {
 
-                    listItems.get(position).setClassChecked(true);
-                    selected.setChecked(listItems.get(position).getClassChecked());
-                } else {
-                    listItems.get(position).setBlack();
-                    name.setText(listItems.get(position).getName());
-                    name.setTextColor(listItems.get(position).getColor());
+                                listItems.get(position).setRed();
+                                name.setText(listItems.get(position).getName());
+                                name.setTextColor(listItems.get(position).getColor());
 
-                    listItems.get(position).setClassChecked(false);
-                    selected.setChecked(listItems.get(position).getClassChecked());
+                                listItems.get(position).setClassChecked(true);
+                                selected.setChecked(listItems.get(position).getClassChecked());
+                            } else {
+                                listItems.get(position).setBlack();
+                                name.setText(listItems.get(position).getName());
+                                name.setTextColor(listItems.get(position).getColor());
+
+                                listItems.get(position).setClassChecked(false);
+                                selected.setChecked(listItems.get(position).getClassChecked());
+
+
                 }
                 ShoppingListAdapter.super.notifyDataSetChanged();
             }

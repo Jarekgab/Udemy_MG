@@ -4,13 +4,16 @@
     tools:context="pl.nauka.jarek.udemy_mg.MainActivity">
     <item
         android:id="@+id/action_add_new_list"
+        android:icon="@drawable/baseline_add_24"
         android:orderInCategory="100"
         android:title="Dodaj nową listę"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_remove_list"
+        android:icon="@drawable/baseline_delete_24"
         android:orderInCategory="100"
         android:title="Usuń listę"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
+
 </menu>

@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +45,8 @@ public class ShoppingListActivity extends AppCompatActivity {
     ImageButton deleteButton;
     @BindView(R.id.itemName_ET)
     BootstrapEditText itemName;
-    @BindView(R.id.deleteItemButton)
-    ImageButton deleteItemButton;
+    @BindView(R.id.addButton)
+    Button addButton;
 
     private List<String> spinnerItems;  //lista rozwijana
     private List<List<ShoppingListElement>> spinnerList;
@@ -63,11 +62,10 @@ public class ShoppingListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         TypefaceProvider.registerDefaultIconSets();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         spinnerItems = new ArrayList<>();
 
-        if (spinnerItems.isEmpty()){
+        if (spinnerItems.isEmpty()) {
             spinnerItems.add("Lista główna");
             spinnerList = new ArrayList<>();
             spinnerList.add(new ArrayList<ShoppingListElement>());
@@ -100,7 +98,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (itemName.getText() != null && !itemName.getText().toString().trim().isEmpty() && !itemName.getText().toString().equals("Podaj nazwę produktu")) {
@@ -144,7 +142,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         if (focused == true) {
             itemName.setText("");
         } else {
-            itemName.setText("Podaj nazwę produktu");
+            itemName.setText("Podaj nazwę");
         }
     }
 
@@ -152,6 +150,9 @@ public class ShoppingListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_shopping_list_activity, menu);
+
+        Menu mMenu = menu;
+
         return true;
     }
 
@@ -171,7 +172,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         if (id == R.id.action_remove_list) {
 
-            if (!spinnerItems.isEmpty() && itemSpinner.getSelectedIndex() > 0){
+            if (!spinnerItems.isEmpty() && itemSpinner.getSelectedIndex() > 0) {
                 spinnerItems.remove(itemSpinner.getSelectedIndex());
                 spinnerList.remove(itemSpinner.getSelectedIndex());
 
@@ -179,7 +180,7 @@ public class ShoppingListActivity extends AppCompatActivity {
                 listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(0));
                 itemList.setAdapter(listAdapter);
 
-            }else if (!spinnerItems.isEmpty() && itemSpinner.getSelectedIndex() == 0){
+            } else if (!spinnerItems.isEmpty() && itemSpinner.getSelectedIndex() == 0) {
 
                 spinnerList.get(itemSpinner.getSelectedIndex()).clear();
                 itemSpinner.setSelectedIndex(0);
@@ -228,15 +229,15 @@ public class ShoppingListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 spinnerItems.add(dialogListNameET.getText().toString());
                 spinnerList.add(new ArrayList<ShoppingListElement>());
-                
-                int newField = spinnerItems.size()-1;
+
+                int newField = spinnerItems.size() - 1;
 
                 itemSpinner.setSelectedIndex(newField);
                 listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(newField));
                 itemList.setAdapter(listAdapter);
 
                 dialog.dismiss();
-                Toast.makeText(ShoppingListActivity.this,"Dodano nową liste: " + dialogListNameET.getText().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ShoppingListActivity.this, "Dodano nową liste: " + dialogListNameET.getText().toString(), Toast.LENGTH_LONG).show();
 
             }
         });

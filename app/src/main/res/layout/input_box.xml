@@ -46,7 +46,8 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/corners"
-            android:text="Anuluj" />
+            android:text="Anuluj"
+            />
 
         <Button
             android:id="@+id/saveButton"
