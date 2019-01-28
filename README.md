@@ -2,14 +2,16 @@
 
 ## Opis
 
-*Udemy JG* jest aplikacją dostępną na Androida, która została przygotowana w ramach kursu [Udemy, "Android - praktyczny podstawowy kurs programowania"](https://www.udemy.com/praktyczny-podstawowy-kurs-programowania-android/learn/v4/content).      
+*Udemy JG* jest aplikacją dostępną na Androida, która została przygotowana w ramach kursu [Udemy, "Android - praktyczny podstawowy kurs programowania"](https://www.udemy.com/praktyczny-podstawowy-kurs-programowania-android/learn/v4/content). 
+
+
 Aplikacja została rozbudowana o nowe funkcjonalności w ramach nauki. Natomiast sam kod zawiera komentarze utworzone podczas wykonywania kursu.
 
 Możesz zainstalować aplikację korzystając z pliku [APK](apk) tego projektu na telefonie z Androidem (min SDK 16) i pracować nad tym projektem za pomocą Android Studio.
 
 ## Funkcje aplikacji
 
-* możliwość tworzenie prostej listy zakupów,
+* możliwość tworzenia prostej listy zakupów,
 * prosta aplikacja rysowania,
 * pobieranie danych z sieci (HTML, JSON), 
 * obsługa klasy AsyncTask. 
