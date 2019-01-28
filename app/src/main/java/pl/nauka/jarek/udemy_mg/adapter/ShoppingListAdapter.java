@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
-
 import pl.nauka.jarek.udemy_mg.R;
 import pl.nauka.jarek.udemy_mg.model.ShoppingListElement;
 
@@ -22,7 +21,6 @@ public class ShoppingListAdapter extends ArrayAdapter {
     private List<ShoppingListElement> listItems;
     private Context context;
     private int resource;
-
 
     public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<ShoppingListElement> listItems) {
         super(context, resource, listItems);
@@ -84,13 +82,10 @@ public class ShoppingListAdapter extends ArrayAdapter {
 
                                 listItems.get(position).setClassChecked(false);
                                 selected.setChecked(listItems.get(position).getClassChecked());
-
-
                 }
                 ShoppingListAdapter.super.notifyDataSetChanged();
             }
         });
-
         return rowView;
     }
 }

@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import java.util.Calendar;
 import java.util.Date;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.digitalzombielab.dayview.DayView;

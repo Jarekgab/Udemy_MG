@@ -1,14 +1,10 @@
 package pl.nauka.jarek.udemy_mg.util;
 
 import android.content.SharedPreferences;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.List;
-
 import pl.nauka.jarek.udemy_mg.model.ShoppingListElement;
-
 
 public class SharedPreferencesSaver {
 

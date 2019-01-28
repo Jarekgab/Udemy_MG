@@ -2,7 +2,6 @@ package pl.nauka.jarek.udemy_mg;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import static android.view.Window.FEATURE_NO_TITLE;
 import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
 

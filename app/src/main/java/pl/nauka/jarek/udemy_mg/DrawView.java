@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,4 +73,3 @@ class DrawView extends View implements View.OnTouchListener {          //impleme
 
 //TODO 1. Zapisywanie widoku po zamknięciu itp.
 //TODO 2. Inne opcje wyboru rysowania (kolor, gubość lini itp)
-//TODO 3. Dokładniejszy sposób rysowania (mniejszy punkt rysowania)

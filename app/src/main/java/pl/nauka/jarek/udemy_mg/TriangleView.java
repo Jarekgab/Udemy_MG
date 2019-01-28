@@ -14,7 +14,6 @@ public class TriangleView extends View {
     Paint paint = new Paint();
     private float width;
     private float height;
-    private float h;
 
     public TriangleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -81,7 +80,6 @@ public class TriangleView extends View {
 
         width = w / 2;
         height = h / 2;
-
     }
 
     @Override
@@ -89,5 +87,3 @@ public class TriangleView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
-
-//TODO onSizeChanged(), onMeasure()  zrobić tak, żeby rysunek automatycznie dopasował się do miejsca rysowania

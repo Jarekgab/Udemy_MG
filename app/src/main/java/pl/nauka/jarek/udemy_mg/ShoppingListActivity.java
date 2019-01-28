@@ -17,15 +17,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
-
 import org.angmarch.views.NiceSpinner;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -147,19 +143,14 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_shopping_list_activity, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_new_list) {
 
             createDialog();
@@ -182,8 +173,6 @@ public class ShoppingListActivity extends AppCompatActivity {
                 itemSpinner.setSelectedIndex(0);
                 listAdapter = new ShoppingListAdapter(ShoppingListActivity.this, R.layout.row_shopping_list, spinnerList.get(0));
                 itemList.setAdapter(listAdapter);
-
-//                Toast.makeText(this,"Nie można usuwać głównej listy", Toast.LENGTH_LONG).show();
 
                 Toast toast = Toast.makeText(this, "Nie można usuwać głównej listy", Toast.LENGTH_LONG);
                 View view = toast.getView();
